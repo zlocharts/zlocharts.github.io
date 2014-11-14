@@ -1,0 +1,3 @@
+# Ignore sqlite db
+board.db
+board.db-journal
