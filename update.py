@@ -45,6 +45,8 @@ last_indexed = service.getLastSavedMsgNumber(ZLO_ID)
 start_time = datetime.datetime.now()
 msg_per_sec = 0.0
 
+added_num = 0
+failed_num = 0
 try:
     for x in xrange(last_saved + 1, last_indexed + 1):
         # Try again on fault.
@@ -58,6 +60,7 @@ try:
                 fail_num += 1
                 if fail_num > 3:
                     print "\rWebFault (#%d):" % x, wb.message
+                    failed_num += 1
                     break
                 continue
             except Exception as e:
@@ -67,8 +70,10 @@ try:
             cur.execute('INSERT INTO messages VALUES (?,?,?,?,?,?,?,?,?,?)',
                         (msg.body, msg.date, msg.hasImg, msg.hasUrl, msg.host,
                          msg.id, msg.nick, msg.reg, msg.title, msg.topic))
+            added_num += 1
         except AttributeError:
             # Message doesn't exist
+            failed_num += 1
             pass
         if x % SPEED_UPDATE_INT == 0:
             current_time = datetime.datetime.now()
@@ -77,7 +82,7 @@ try:
                 msg_per_sec = (x - last_saved) / delta.total_seconds()
         eta_sec = int((last_indexed - x) /
                       (msg_per_sec if msg_per_sec != 0 else 0.01))
-        print '\r[%d/%d] Loading messages... (%.2f msg/sec, %d:%d:%d ETA)' % \
+        print '\r[%d/%d] Loading messages... (%.2f msg/sec, %.2d:%.2d:%.2d ETA)' % \
             (x, last_indexed, msg_per_sec, eta_sec / 3600,
                     (eta_sec % 3600) / 60, eta_sec % 60),
         sys.stdout.flush()
@@ -86,3 +91,6 @@ try:
 finally:
     conn.commit()
     conn.close()
+    print "\nTotal added: %d\nTotal failed: %d (Err %.2f%%)" % \
+            (added_num, failed_num, float(failed_num) /
+                    (added_num if added_num != 0 else 1) * 100)
