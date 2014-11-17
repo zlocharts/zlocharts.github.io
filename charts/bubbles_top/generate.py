@@ -37,7 +37,7 @@ for r in cur:
 result = {'name': 'board.rt.mipt.ru', 'children': children}
 
 # Write to top100.json
-f = open(path.dirname(os.argv[0]) + '/top100.json', 'w')
+f = open(path.dirname(argv[0]) + '/top100.json', 'w')
 json.dump(result, f)
 f.close()
 
