@@ -5,12 +5,15 @@ Plot bubbles proportionally to the number of messages during the last week.
 
 from datetime import datetime
 from datetime import timedelta
+from os import path
+from sys import argv
 import json
 import sqlite3
 
 print 'Regenerating bubbles_top...'
 
-conn = sqlite3.connect('../../board.db')
+db_name = path.dirname(argv[0]) + '/../../board.db'
+conn = sqlite3.connect(db_name)
 cur = conn.cursor()
 
 # Top 100 users by messages num for the last week.
@@ -34,7 +37,7 @@ for r in cur:
 result = {'name': 'board.rt.mipt.ru', 'children': children}
 
 # Write to top100.json
-f = open('top100.json', 'w')
+f = open(path.dirname(os.argv[0]) + '/top100.json', 'w')
 json.dump(result, f)
 f.close()
 
