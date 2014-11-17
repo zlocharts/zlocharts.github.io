@@ -1,3 +1,5 @@
 # Ignore sqlite db
 board.db
 board.db-journal
+# Ignore temporary vim files
+.*.swp
