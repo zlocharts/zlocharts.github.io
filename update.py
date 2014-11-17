@@ -32,6 +32,8 @@ cur = conn.cursor()
 cur.execute('CREATE TABLE IF NOT EXISTS messages (body text, date timestamp,'
             'hasImg boolean, hasUrl boolean, host text, id integer PRIMARY KEY,'
             'nick text, reg boolean, title text, topic text)')
+# And index
+cur.execute('CREATE INDEX IF NOT EXISTS DateIndex ON messages (date);')
 
 c = Client('http://zlo.rt.mipt.ru:7500/ws/search?wsdl')
 service = c.service
