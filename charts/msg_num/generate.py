@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import sqlite3
 
+print 'Regenerating msg_num...'
+
 conn = sqlite3.connect('../../board.db')
 cur = conn.cursor()
 
@@ -10,3 +12,5 @@ f.write('date,id\n')
 for r in cur:
   f.write(str(r[0]) + ',' + str(r[1]) + '\n')
 f.close()
+
+print 'Done'

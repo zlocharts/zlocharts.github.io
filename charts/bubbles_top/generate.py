@@ -8,6 +8,8 @@ from datetime import timedelta
 import json
 import sqlite3
 
+print 'Regenerating bubbles_top...'
+
 conn = sqlite3.connect('../../board.db')
 cur = conn.cursor()
 
@@ -35,3 +37,5 @@ result = {'name': 'board.rt.mipt.ru', 'children': children}
 f = open('top100.json', 'w')
 json.dump(result, f)
 f.close()
+
+print 'Done'
