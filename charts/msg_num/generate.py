@@ -8,5 +8,5 @@ cur.execute('SELECT date, id FROM messages WHERE id % 10000 = 0 ORDER BY date')
 f = file('msg.csv', 'w')
 f.write('date,id\n')
 for r in cur:
-    f.write(str(r[0]) + ',' + str(r[1]) + '\n')
+  f.write(str(r[0]) + ',' + str(r[1]) + '\n')
 f.close()

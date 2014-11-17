@@ -1,7 +1,12 @@
 #!/usr/bin/env python
+"""
+Plot bubbles proportionally to the number of messages during the last week.
+"""
 
+from datetime import datetime
+from datetime import timedelta
+import json
 import sqlite3
-from datetime import datetime, timedelta
 
 conn = sqlite3.connect('../../board.db')
 cur = conn.cursor()
@@ -17,16 +22,14 @@ children = []
 children_split = []
 total_num = 0
 for r in cur:
-    total_num += 1
-    children_split.append({'name': r[0], 'size': r[1]})
-    if len(children_split) == SPLIT_NUM:
-        children.append({'name': 'top' + str(total_num),
-                         'children': children_split})
-        children_split = []
+  total_num += 1
+  children_split.append({'name': r[0], 'size': r[1]})
+  if len(children_split) == SPLIT_NUM:
+    children.append({'name': 'top' + str(total_num),
+                     'children': children_split})
+    children_split = []
 
 result = {'name': 'board.rt.mipt.ru', 'children': children}
-
-import json
 
 # Write to top100.json
 f = open('top100.json', 'w')
