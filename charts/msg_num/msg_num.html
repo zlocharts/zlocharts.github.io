@@ -124,7 +124,6 @@ function brushed() {
   x.domain(brush.empty() ? x2.domain() : brush.extent());
   y_from = d3.min(data_cb.map(function(d){return d.date > x.domain()[0] ? d.id : 10e100}));
   y_to = d3.max(data_cb.map(function(d){return d.date < x.domain()[1] ? d.id : 0}));
-  console.log(y_from, y_to);
   y.domain([y_from, y_to]);
   yAxis = d3.svg.axis().scale(y).orient("left");
   focus.select('.y.axis').call(yAxis);
