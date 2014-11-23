@@ -2,6 +2,6 @@
 
 DIRNAME=`dirname $0`
 
-$DIRNAME/update.py
+$DIRNAME/update_db.py || exit 1
 $DIRNAME/charts/bubbles_top/generate.py
 $DIRNAME/charts/msg_num/generate.py
