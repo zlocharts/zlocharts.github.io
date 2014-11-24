@@ -3,3 +3,5 @@ board.db
 board.db-journal
 # Ignore temporary vim files
 .*.swp
+# Python bytecode
+*.pyc

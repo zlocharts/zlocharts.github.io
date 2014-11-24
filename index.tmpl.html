@@ -1,0 +1,29 @@
+{% extends "main.tmpl.html" %}
+{% block content %}
+<div class="inner cover">
+  <h1 class="cover-heading">Графики</h1>
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <a href="/charts/msg_num/msg_num.html">
+          <img src="/static/img/msg_num.png" alt="msg_num">
+          <div class="caption">
+            <h3>Количество сообщений</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <a href="/charts/bubbles_top/bubbles_top.html">
+          <img src="/static/img/bubbles_top.png" alt="bubbles_top">
+          <div class="caption">
+            <h3>Top 100 ников за 2 недели</h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="leading">Скоро будет больше...</p>
+</div>
+{% endblock %}
